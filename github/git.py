@@ -1,5 +1,6 @@
 from github import Github
 import networkx as nx
+from networkx.readwrite import json_graph
 
 G = nx.DiGraph()
 
@@ -23,5 +24,8 @@ for fols in followers:
 
 
 print nx.info(G)
+
+with open("grahp.json", 'w') as f:
+    json.dump(data, f, indent=4)
 # print dir(user)
 
