@@ -4,7 +4,7 @@
 File Name: git.py
 Description: 
 Created_Time: 2016-11-08 11:35:47
-Last modified: 2016-11-09 16时43分25秒
+Last modified: 2016-11-14 10时22分18秒
 '''
 
 _author = 'arron'
@@ -45,7 +45,8 @@ for fols in followers:
         G.add_node(f.login + '(user)', type='user')
         G.add_edge(f.login + '(user)', fols.login + '(user)', type='gazes')
     for fi in fols.get_following():
-        pass
+        G.add_node(fi.login + '(user)', type='user')
+        G.add_edge(fols.login + '(user)', fi.login + '(user)', type='gazes')
 
 for follin in following:
     G.add_node(follin.login + '(user)', type='user')
@@ -54,7 +55,8 @@ for follin in following:
         G.add_node(f.login + '(user)', type='user')
         G.add_edge(f.login + '(user)', follin.login + '(user)', type='gazes')
     for fi in follin.get_following():
-        pass
+        G.add_node(fi.login + '(user)', type='user')
+        G.add_edge(follin.login + '(user)', fi.login + '(user)', type='gazes')
     
 
 # print nx.info(G)
@@ -62,9 +64,12 @@ for follin in following:
 d = json_graph.node_link_data(G)
 json.dump(d, open('graph.json', 'w'))
 
-viz_file = 'graph.html'
 
-display(IFrame(viz_file, '100%', '600px'))
+nx.write_graphml(G, "z0ne.graphml")
+
+# viz_file = 'graph.html'
+
+# display(IFrame(viz_file, '100%', '600px'))
 
 
 
